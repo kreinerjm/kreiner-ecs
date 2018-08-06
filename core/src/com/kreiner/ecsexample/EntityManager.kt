@@ -8,8 +8,10 @@ class EntityManager{
     val filteredEntities = HashMap<KClass<out System>,MutableList<Int>>()
     val idManager = EntityIdManager()
 
-    fun addEntity(entity: Entity){
-        allEntities.put(idManager.getNext(),entity)
+    fun addEntity(entity: Entity): Int{
+        val next = idManager.getNext()
+        allEntities.put(next,entity)
+        return next
     }
 
     fun removeEntity(key: Int){

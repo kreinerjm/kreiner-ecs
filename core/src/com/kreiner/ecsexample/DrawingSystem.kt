@@ -1,8 +1,6 @@
 package com.kreiner.ecsexample
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import javax.swing.plaf.basic.BasicTableHeaderUI
-import kotlin.reflect.KClass
 
 class DrawingSystem: System(){
     override val worksOn = listOf(PhysicalComponent::class,GraphicsComponent::class)
@@ -19,12 +17,12 @@ class DrawingSystem: System(){
                 when(gc.type){
                     DrawingType.SHAPE_RENDERER -> {
                         val renderer = BatchManager.shapeRenderer
+                        renderer.color = gc.color
                         renderer.begin(ShapeRenderer.ShapeType.Filled)
                         renderer.rect(pc.x,pc.y,pc.width,pc.height)
                         renderer.end()
                     }
                 }
-
             }
         }
     }
