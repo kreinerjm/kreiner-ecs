@@ -15,6 +15,7 @@ class ECSExample : ApplicationAdapter() {
 
     val drawingSystem = DrawingSystem()
     val inputSystem = InputSystem()
+    val tileSystem = TileSystem()
 
 
     override fun create() {
@@ -22,25 +23,13 @@ class ECSExample : ApplicationAdapter() {
 
         val w = Gdx.graphics.width.toFloat()
         val h = Gdx.graphics.height.toFloat()
-        camera = OrthographicCamera(30f, 30 * (h / w))
+        camera = OrthographicCamera(550f, 550f * (h / w))
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f)
         camera.update()
         ECS.camera = camera
 
         BatchManager.shapeRenderer = ShapeRenderer()
-        val button = EntityAssembler.createButton()
-        button.second += KeyboardInputComponent()
-        EventRegistry.registerMouseEvent(MouseEvent.HOVER_ENTER, button.first){
-            val gc = button.second.getComponent<GraphicsComponent>(GraphicsComponent::class)
-            gc!!.color = Color.BLUE
-        }
-        EventRegistry.registerMouseEvent(MouseEvent.HOVER, button.first){
-            //println("hovering")
-        }
-        EventRegistry.registerMouseEvent(MouseEvent.HOVER_EXIT, button.first){
-            val gc = button.second.getComponent<GraphicsComponent>(GraphicsComponent::class)
-            gc!!.color = Color.GREEN
-        }
+
     }
 
     override fun render() {

@@ -11,4 +11,16 @@ object EntityAssembler{
         return id to toReturn
     }
 
+    fun createTile(): Pair<Int,Entity>{
+        val toReturn = Entity()
+        toReturn += MouseEventEmitter()
+        toReturn += PhysicalComponent().apply{
+            width = 50f
+            height = 50f
+        }
+        toReturn += GraphicsComponent()
+        val id = ECS.manager.addEntity(toReturn)
+        return id to toReturn
+    }
+
 }
