@@ -3,6 +3,7 @@ package com.kreiner.ecsexample
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.math.Vector3
+import com.sun.javafx.geom.Vec2f
 import kotlin.reflect.KClass
 
 class InputSystem(): System(){
@@ -14,11 +15,7 @@ class InputSystem(): System(){
 
     fun handleKeyInput(){
         ECS.manager.allEntities.values.forEach{ entity ->
-            var hasAll = true
-            worksOn.forEach {
-                if(!entity.hasType(it)) hasAll = false
-            }
-            if(hasAll){
+            if(entity.hasAll(worksOn)){
                 val kic = entity.getComponent<KeyboardInputComponent>(KeyboardInputComponent::class)!!
                 val pc = entity.getComponent<PhysicalComponent>(PhysicalComponent::class)!!
                 when(kic.type){

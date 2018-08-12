@@ -4,6 +4,8 @@ import kotlin.reflect.KClass
 
 class Entity: ArrayList<Component>(){
 
+    var id = -1
+
     override fun add(element: Component): Boolean {
         val toReturn = super.add(element)
 //        ECS.systems.forEach { system ->
@@ -34,6 +36,13 @@ class Entity: ArrayList<Component>(){
             }
         }
         return null
+    }
+
+    fun hasAll(types: List<KClass<out Component>>): Boolean{
+        types.forEach {
+            if(!hasType(it)) return false
+        }
+        return true
     }
 
 }

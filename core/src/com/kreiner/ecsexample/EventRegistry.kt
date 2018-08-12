@@ -20,4 +20,19 @@ object EventRegistry{
         mouseEvents[event]!![id] = lambda
     }
 
+    fun unregisterAll(id: Int){
+        val toRemove = mutableListOf<MouseEvent>()
+        mouseEvents.keys.forEach{ eventMap ->
+            mouseEvents[eventMap]?.forEach{
+                if(it.key == id){
+                    toRemove += eventMap
+
+                }
+            }
+        }
+        toRemove.forEach{
+            mouseEvents[it]!!.remove(id)
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ class EntityManager{
     fun addEntity(entity: Entity): Int{
         val next = idManager.getNext()
         allEntities.put(next,entity)
+        entity.id = next
         return next
     }
 

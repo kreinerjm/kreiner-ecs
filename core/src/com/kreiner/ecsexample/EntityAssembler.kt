@@ -23,4 +23,13 @@ object EntityAssembler{
         return id to toReturn
     }
 
+    fun createEnemy(): Pair<Int,Entity>{
+        val toReturn = Entity()
+        toReturn += PhysicalComponent()
+        toReturn += GraphicsComponent()
+        toReturn += EnemyComponent()
+        val id = ECS.manager.addEntity(toReturn)
+        return id to toReturn
+    }
+
 }

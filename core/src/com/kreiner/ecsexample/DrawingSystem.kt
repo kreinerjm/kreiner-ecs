@@ -7,11 +7,7 @@ class DrawingSystem: System(){
 
     fun draw(){
         ECS.manager.allEntities.values.forEach{ entity ->
-            var hasAll = true
-            worksOn.forEach {
-                if(!entity.hasType(it)) hasAll = false
-            }
-            if(hasAll){
+            if(entity.hasAll(worksOn)){
                 val gc = entity.getComponent<GraphicsComponent>(GraphicsComponent::class)!!
                 val pc = entity.getComponent<PhysicalComponent>(PhysicalComponent::class)!!
                 when(gc.type){
