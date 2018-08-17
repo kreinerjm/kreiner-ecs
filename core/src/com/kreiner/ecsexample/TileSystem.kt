@@ -6,9 +6,9 @@ class TileSystem {
     val tiles = mutableListOf<MutableList<Entity>>()
 
     init{
-        for(i in 0..10){
+        for(i in 0..511){
             val list = mutableListOf<Entity>()
-            for(j in 0..10){
+            for(j in 0..511){
                 val tile = EntityAssembler.createTile().apply{
                     val pc = second.getComponent<PhysicalComponent>(PhysicalComponent::class)!!
                     pc.apply{
@@ -16,20 +16,6 @@ class TileSystem {
                         y = i * 50f
                     }
                     val gc = second.getComponent<GraphicsComponent>(GraphicsComponent::class)
-                    if((i == 5 && j == 0) || (j == 5 && i == 0) || (j == 10 && i == 5) || (i == 10 && j == 5)){
-                        println("added spawner component")
-                        second.remove(second.getComponent<MouseEventEmitter>(MouseEventEmitter::class)!!)
-                        second.add(SpawnerComponent())
-                        gc!!.color = Color.RED
-                    } else {
-                        println("added regular tile component")
-                        EventRegistry.registerMouseEvent(MouseEvent.HOVER_ENTER, first){
-                            gc!!.color = Color.BLUE
-                        }
-                        EventRegistry.registerMouseEvent(MouseEvent.HOVER_EXIT, first){
-                            gc!!.color = Color.GREEN
-                        }
-                    }
                 }
                 list.add(tile.second)
             }
